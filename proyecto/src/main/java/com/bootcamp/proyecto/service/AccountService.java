@@ -1,6 +1,6 @@
-package com.bootcamp.proyecto1.service;
+package com.bootcamp.proyecto.service;
 
-import com.bootcamp.proyecto1.modelo.Account;
+import com.bootcamp.proyecto.modelo.Account;
 
 
 import reactor.core.publisher.Flux;
