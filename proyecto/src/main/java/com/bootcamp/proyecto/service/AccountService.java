@@ -15,5 +15,7 @@ public interface AccountService {
     Mono<Account> updateAcco(Account a);
     Mono<Void> deleteAcco(Integer id);
     public Flux<Account> findByClienttId(int id);
+    public Flux<String> getAllAccountDatesProduct(int productId, String dateIni, String dateFin);
+    public Flux<String> getAllAccountCardNumber(String cardNumber);
     
 }
