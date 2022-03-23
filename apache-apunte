@@ -1,0 +1,9 @@
+#inicializando los server
+zookeeper-server-start.bat ..\..\config\zookeeper.properties
+kafka-server-satart.bat ..\..\config\server.properties
+#creamos una nueva carpeta llamada bootcamp
+kafka-topics.bat --create --topic bootcamp --bootstrap-server localhost:9092
+kafka-topics.bat --list --bootstrap-server localhost:9092
+#creamos servidores consumer"reception" and "send"
+kafka-console-consumer.bat --topic bootcamp --bootstrap-server localhost:9092
+kafka-console-producer.bat --topic bootcamp --bootstrap-server localhost:9092
