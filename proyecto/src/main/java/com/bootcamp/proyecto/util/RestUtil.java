@@ -17,14 +17,10 @@ public class RestUtil {
 	
 	public static ReactorClientHttpConnector getClientConnector(int connectionTimeout, int readTimeout,
 			int writeTimeout) {
-
-		HttpClient httpClient = HttpClient.create()
-				.resolver(DefaultAddressResolverGroup.INSTANCE)
-				.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectionTimeout)
-				.doOnConnected(conn -> conn
-						.addHandlerLast(new ReadTimeoutHandler(readTimeout, TimeUnit.MILLISECONDS))
-						.addHandlerLast(new WriteTimeoutHandler(writeTimeout, TimeUnit.MILLISECONDS)));
-
+		HttpClient httpClient = HttpClient.create().resolver(DefaultAddressResolverGroup.INSTANCE)
+				.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectionTimeout).doOnConnected(conn -> conn
+						.addHandlerLast(new ReadTimeoutHandler(readTimeout, TimeUnit.MICROSECONDS))
+						.addHandlerLast(new WriteTimeoutHandler(writeTimeout, TimeUnit.MICROSECONDS)));
 		return new ReactorClientHttpConnector(httpClient);
 	}
 }

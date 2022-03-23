@@ -1,18 +1,20 @@
 package com.bootcamp.proyecto.config;
 
 import java.time.Duration;
-
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 
 @Configuration
 public class RedisConfig {
 
 	@Bean
-    public RedisConfiguration Configuration() {
-        return RedisConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(60))
+    public RedisCacheConfiguration Configuration() {
+        return RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(1000))
                 .disableCachingNullValues()
                 .serializeValuesWith(SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
     }
@@ -21,9 +23,9 @@ public class RedisConfig {
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
         return (builder) -> builder
                 .withCacheConfiguration("users",
-                		RedisConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(10)))
+                		RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(100)))
                 .withCacheConfiguration("customerCache",
-                		RedisConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(5)));
+                		RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(50)));
     }
     
 }

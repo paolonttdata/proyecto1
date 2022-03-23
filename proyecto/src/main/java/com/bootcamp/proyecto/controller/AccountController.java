@@ -25,7 +25,7 @@ public class AccountController {
 	@PostMapping("/create/accou")
     @ResponseStatus(HttpStatus.CREATED)
     public void createAcco (@RequestBody Account account){
-		accountService.createAcco(account);
+		accountService.save(account);
     }
 
     @GetMapping(value = "/get/all",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
@@ -38,7 +38,7 @@ public class AccountController {
     @GetMapping("/get/{id}")
     @ResponseBody
     public ResponseEntity<Mono<Account>> findById(@PathVariable("id") Integer id){
-    	Mono<Account> accountMono=accountService.findByAccoId(id);
+    	Mono<Account> accountMono=accountService.findById(id);
         return new ResponseEntity<Mono<Account>>(accountMono,accountMono != null? HttpStatus.OK:HttpStatus.NOT_FOUND);
     }
 }

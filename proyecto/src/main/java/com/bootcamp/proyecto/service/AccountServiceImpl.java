@@ -29,13 +29,13 @@ public class AccountServiceImpl implements AccountService{
         Flux<Account> flux = findByClientId(a.getClient().getId())
                 .map(data -> {
                     if (a.getClient() == null) {
-                        throw new RuntimeException("Dato de ingreso del cliente"); }
+                        throw new RuntimeException("Ingresar el cliente"); }
                     if (a.getProduct() == null) {
-                        throw new RuntimeException("Dato de ingreso del producto"); }
+                        throw new RuntimeException("Ingresar el producto"); }
                     if (a.getBaseamount() == null) {
-                        throw new RuntimeException("Dato de ingreso del monto base"); }
+                        throw new RuntimeException("Ingresar el monto base"); }
                     if (a.getAmount() == null) {
-                        throw new RuntimeException("Dato de ingreso del monto"); }
+                        throw new RuntimeException("Ingresar el monto"); }
                     return data;
                 })
                 .filter(data -> {
@@ -75,7 +75,7 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	public Flux<String> findByClient(int id) {
 		return accountRepository.findAll()
-                .filter(data -> data.getClient().getId() == Id).map(clienttype -> {return clienttype.getProduct().getName() 
+                .filter(data -> data.getClient().getId() == id).map(clienttype -> {return clienttype.getProduct().getName() 
                 		+ "(monto inicial " + clienttype.getBaseamount() + "): " + clienttype.getAmount();});
 	}
 	@Override
